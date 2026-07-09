@@ -140,3 +140,39 @@ When helping with implementation:
 - After code changes, remind that the next actions are add, commit, push, and PR.
 - After PR creation, stop and wait for review feedback.
 - When asked to review comments, focus only on the feedback in the PR and the changes needed to address it.
+
+## Agent skills policy
+
+Use Addy Osmani agent skills selectively. Do not load all skills at once.
+
+### Default skills for this project
+
+- spec-driven-development
+- planning-and-task-breakdown
+- incremental-implementation
+- test-driven-development
+- code-review-and-quality
+- git-workflow-and-versioning
+
+### Use when relevant
+
+- frontend-ui-engineering for UI, component, accessibility, responsive layout, and design-system-heavy work
+- api-and-interface-design for route design, import contracts, schema boundaries, and service interfaces
+- source-driven-development for SimHub research, telemetry formats, CSV parsing assumptions, and external tool integration details
+- debugging-and-error-recovery for failed imports, broken charts, parsing bugs, and unexpected behavior
+- browser-testing-with-devtools for validating dashboard flows, comparison screens, responsiveness, and browser-side issues
+- security-and-hardening for file uploads, input validation, and external integration boundaries
+- observability-and-instrumentation for import pipeline logs, metrics, tracing, and error visibility
+- documentation-and-adrs for architectural decisions worth preserving and explaining later in interviews
+
+### Workflow rule
+
+For each branch or PR step, activate only the smallest relevant set of skills.
+
+### Suggested branch-to-skill mapping
+
+- Product or UX planning branch: spec-driven-development, planning-and-task-breakdown
+- UI implementation branch: frontend-ui-engineering, incremental-implementation, code-review-and-quality
+- Import pipeline branch: api-and-interface-design, source-driven-development, test-driven-development
+- Bugfix branch: debugging-and-error-recovery, browser-testing-with-devtools
+- PR preparation branch or final review pass: code-review-and-quality, git-workflow-and-versioning
