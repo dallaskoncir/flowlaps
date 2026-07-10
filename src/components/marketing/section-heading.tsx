@@ -6,12 +6,14 @@ export function SectionHeading({
   description,
   align = "left",
   className,
+  descriptionClassName,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
   className?: string;
+  descriptionClassName?: string;
 }) {
   return (
     <div
@@ -28,7 +30,9 @@ export function SectionHeading({
         {title}
       </h2>
       {description ? (
-        <p className="max-w-2xl text-muted-foreground">{description}</p>
+        <p className={cn("max-w-2xl text-muted-foreground", descriptionClassName)}>
+          {description}
+        </p>
       ) : null}
     </div>
   );

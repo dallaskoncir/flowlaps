@@ -30,7 +30,7 @@ export function ProblemSection() {
           {problems.map((problem) => (
             <div key={problem.title} className="flex flex-col gap-2">
               <h3 className="font-medium">{problem.title}</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/70">
                 {problem.description}
               </p>
             </div>

@@ -13,7 +13,7 @@ export function WhoItsForSection() {
         <SectionHeading eyebrow="Who it's for" title="For drivers who just want to get better." />
         <ul className="mt-8 flex flex-col gap-4 sm:max-w-2xl">
           {audience.map((line) => (
-            <li key={line} className="flex gap-3 text-muted-foreground">
+            <li key={line} className="flex gap-3 text-foreground/70">
               <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
               <span>{line}</span>
             </li>

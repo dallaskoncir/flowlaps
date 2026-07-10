@@ -10,6 +10,7 @@ export function WaitlistSection() {
           title="Be first in when Flowlaps opens up."
           description="No spam, just a note when it's ready to try."
           align="center"
+          descriptionClassName="text-foreground/70"
         />
         <div className="w-full max-w-md">
           <WaitlistForm />
