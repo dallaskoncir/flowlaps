@@ -21,7 +21,7 @@ export default function Home() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
-          A calm overview of your recent sessions and coaching.
+          See where you&apos;re gaining time and what to focus on next.
         </p>
       </div>
 

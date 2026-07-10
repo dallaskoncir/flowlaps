@@ -23,9 +23,9 @@ export function KpiSummary({ sessions, latestReport }: KpiSummaryProps) {
       description: "In your recent history",
     },
     {
-      label: "Best lap",
+      label: "Fastest lap",
       value: formatLapTime(bestSession.bestLapMs),
-      description: bestSession.trackName,
+      description: `Outright, at ${bestSession.trackName}`,
     },
     {
       label: "Avg. consistency",
