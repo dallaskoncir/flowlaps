@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const navItems = [
-  { href: "/", label: "Dashboard" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/import", label: "Import" },
   { href: "/history", label: "History" },
   { href: "/settings", label: "Settings" },
@@ -11,7 +11,7 @@ export function SiteNav() {
   return (
     <header className="border-b border-border">
       <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6">
-        <Link href="/" className="text-sm font-semibold tracking-tight">
+        <Link href="/dashboard" className="text-sm font-semibold tracking-tight">
           Flowlaps
         </Link>
         <nav className="flex items-center gap-6">
