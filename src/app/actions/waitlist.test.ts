@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { joinWaitlist } from "./waitlist";
+import { joinWaitlist, WAITLIST_SIGNUP_EVENT } from "./waitlist";
 import { prisma } from "@/lib/prisma";
 import { track } from "@vercel/analytics/server";
 
@@ -78,9 +78,9 @@ describe("joinWaitlist", () => {
     });
     expect(result).toEqual({ status: "success" });
     expect(mockedTrack).toHaveBeenCalledWith(
-      "Waitlist Signup",
+      WAITLIST_SIGNUP_EVENT,
       undefined,
-      expect.objectContaining({ headers: expect.anything() }),
+      expect.objectContaining({ headers: expect.any(Headers) }),
     );
   });
 

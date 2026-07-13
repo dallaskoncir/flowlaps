@@ -17,6 +17,8 @@ const waitlistSchema = z.object({
 const INVALID_EMAIL_MESSAGE = "Please enter a valid email address.";
 const UNEXPECTED_ERROR_MESSAGE = "Something went wrong. Please try again.";
 
+export const WAITLIST_SIGNUP_EVENT = "Waitlist Signup";
+
 export async function joinWaitlist(
   _prevState: WaitlistState,
   formData: FormData,
@@ -52,7 +54,9 @@ export async function joinWaitlist(
     };
   }
 
-  await track("Waitlist Signup", undefined, { headers: await headers() });
+  // Fire-and-forget: track() swallows its own errors and, on Vercel, defers
+  // the request via waitUntil, so it must never block or fail the response.
+  void track(WAITLIST_SIGNUP_EVENT, undefined, { headers: await headers() });
 
   return { status: "success" };
 }
