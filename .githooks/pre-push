@@ -3,6 +3,7 @@ set -euo pipefail
 
 zero_sha="0000000000000000000000000000000000000000"
 empty_tree="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+remote_name="$1"
 
 changed_files=""
 
@@ -11,7 +12,23 @@ while read -r local_ref local_sha remote_ref remote_sha; do
 	[ "$local_sha" = "$zero_sha" ] && continue
 
 	if [ "$remote_sha" = "$zero_sha" ]; then
-		range="$empty_tree..$local_sha"
+		# New branch on the remote: diff against the merge-base with the
+		# remote's default branch instead of the empty tree, otherwise every
+		# file in the repo shows up as "changed".
+		default_branch=$(git symbolic-ref --quiet --short "refs/remotes/$remote_name/HEAD" 2>/dev/null || true)
+		base=""
+		if [ -n "$default_branch" ]; then
+			base=$(git merge-base "$default_branch" "$local_sha" 2>/dev/null || true)
+		fi
+		if [ -z "$base" ]; then
+			for candidate in main master; do
+				if git rev-parse --verify --quiet "refs/remotes/$remote_name/$candidate" >/dev/null; then
+					base=$(git merge-base "refs/remotes/$remote_name/$candidate" "$local_sha" 2>/dev/null || true)
+					[ -n "$base" ] && break
+				fi
+			done
+		fi
+		range="${base:-$empty_tree}..$local_sha"
 	else
 		range="$remote_sha..$local_sha"
 	fi
