@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+zero_sha="0000000000000000000000000000000000000000"
+empty_tree="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+
+changed_files=""
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+	[ -z "$local_sha" ] && continue
+	[ "$local_sha" = "$zero_sha" ] && continue
+
+	if [ "$remote_sha" = "$zero_sha" ]; then
+		range="$empty_tree..$local_sha"
+	else
+		range="$remote_sha..$local_sha"
+	fi
+
+	files=$(git diff --name-only "$range" -- '*.ts' '*.tsx' '*.js' '*.jsx' 2>/dev/null || true)
+	if [ -n "$files" ]; then
+		changed_files="$changed_files
+$files"
+	fi
+done
+
+if [ -z "$(echo "$changed_files" | tr -d '[:space:]')" ]; then
+	exit 0
+fi
+
+pnpm run review:local

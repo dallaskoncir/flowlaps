@@ -1,8 +1,11 @@
 allowBuilds:
   '@prisma/engines': true
+  isolated-vm: true
   prisma: true
   sharp: true
   unrs-resolver: true
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+minimumReleaseAgeExclude:
+  - '@flowlaps/scrutineer@0.1.0'
