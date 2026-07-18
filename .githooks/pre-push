@@ -49,8 +49,9 @@ fi
 RESULT=0
 while IFS= read -r file; do
   echo "Reviewing $file (timeout ${review_timeout}s)..."
-  if ! timeout "$review_timeout" pnpm run review:local -- "$file"; then
-    rc=$?
+  timeout "$review_timeout" pnpm run review:local -- "$file"
+  rc=$?
+  if [ "$rc" -ne 0 ]; then
     [ "$rc" -eq 124 ] && echo "pre-push: review of $file timed out after ${review_timeout}s (check that Ollama is reachable and the model is pulled)" >&2
     RESULT=1
   fi
