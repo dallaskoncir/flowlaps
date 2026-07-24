@@ -7,20 +7,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatLapTime } from "@/lib/format";
-import { getBestLap, getTheoreticalBestSectors } from "@/lib/lap-analysis";
+import { getBestLap } from "@/lib/lap-analysis";
 import type { LapSummary } from "@/types/lap";
+import type { TheoreticalBestSectors } from "@/lib/lap-analysis";
 
 interface LapTableProps {
   laps: LapSummary[];
+  bestSectors?: TheoreticalBestSectors;
 }
 
 function formatSector(ms: number): string {
   return (ms / 1000).toFixed(3);
 }
 
-export function LapTable({ laps }: LapTableProps) {
+export function LapTable({ laps, bestSectors }: LapTableProps) {
   const bestLap = getBestLap(laps);
-  const bestSectors = getTheoreticalBestSectors(laps);
 
   return (
     <Card>
@@ -34,7 +35,7 @@ export function LapTable({ laps }: LapTableProps) {
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[480px] border-collapse text-sm">
+          <table className="w-full min-w-120 border-collapse text-sm">
             <thead>
               <tr className="border-b text-left text-xs text-muted-foreground">
                 <th className="py-2 pr-3 font-medium">Lap</th>

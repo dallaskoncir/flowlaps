@@ -24,7 +24,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-6 py-10">
       <SessionHeader session={session} />
       <SessionKpis session={session} theoreticalBestMs={bestSectors?.theoreticalBestMs} />
-      <LapTable laps={laps} />
+      <LapTable laps={laps} bestSectors={bestSectors} />
     </main>
   );
 }
